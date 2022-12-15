@@ -127,7 +127,7 @@ def update_points(name_home: str, name_away: str, gd: int) -> None:
     team_home.update_elo(team_home.get_elo() + point_calculation(goal_index(gd),
                          home_result, expected_result(team_home.get_elo(), team_away.get_elo())))
     team_away.update_elo(team_away.get_elo() + point_calculation(goal_index(gd),
-                         away_result, 1 - expected_result(team_home.get_elo(), team_away.get_elo())))
+                         away_result, expected_result(team_away.get_elo(), team_home.get_elo())))
 
 
 def point_calculation(goal_index: float, result: float, expected: float) -> None:
