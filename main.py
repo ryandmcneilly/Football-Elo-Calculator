@@ -23,10 +23,10 @@ teams = []
 class Team(object):
     """ Basic team object storing the name and the elo.
     """
-
-    def __init__(self, name: str, elo=STARTING_ELO) -> None:
+    def __init__(self, name: str, elo=STARTING_ELO, points = 0) -> None:
         self._name = name
         self._elo = elo
+        self._points = points
 
     def get_name(self) -> str:
         return self._name
@@ -92,10 +92,10 @@ def print_elos() -> None:
         # Prints Names of each team
         left_space = length - len(team.get_name())
         print(f"{counter + 1}. {team.get_name()}" +
-              " " * left_space + "| ", end="")
+              " " * (left_space - ((counter + 1) // 10)) + "| ", end="")
 
         # Prints the elo
-        print(space_till_title // 3 * " " + str(team.get_elo()))
+        print(space_till_title // 3 * " " + str(round(team.get_elo(), 2)))
 
 
 def update_points(name_home: str, name_away: str, gd: int) -> None:
