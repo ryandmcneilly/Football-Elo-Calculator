@@ -1,0 +1,146 @@
+{
+    "match_0": {
+        "team_1": {
+            "name": "Sliding into CDMs",
+            "goals": 6
+        },
+        "team_2": {
+            "name": "Rush Hour",
+            "goals": 0
+        },
+        "winner": 1,
+        "date": "2022-12-04"
+    },
+    "match_1": {
+        "team_1": {
+            "name": "Soccer on Deez",
+            "goals": 2
+        },
+        "team_2": {
+            "name": "Netflix and Chill",
+            "goals": 1
+        },
+        "winner": 1,
+        "date": "2022-12-04"
+    },
+    "match_2": {
+        "team_1": {
+            "name": "Sweet & Sour Pork",
+            "goals": 1
+        },
+        "team_2": {
+            "name": "Azkaban's Finest",
+            "goals": 3
+        },
+        "winner": 2,
+        "date": "2022-12-04"
+    },
+    "match_3": {
+        "team_1": {
+            "name": "Suss FC",
+            "goals": 2
+        },
+        "team_2": {
+            "name": "Beverton",
+            "goals": 4
+        },
+        "winner": 2,
+        "date": "2022-12-04"
+    },
+    "match_4": {
+        "team_1": {
+            "name": "Step Sissoko",
+            "goals": 3
+        },
+        "team_2": {
+            "name": "Binga's Blokes",
+            "goals": 4
+        },
+        "winner": 2,
+        "date": "2022-12-04"
+    },
+    "match_5": {
+        "team_1": {
+            "name": "Soggy Sausages FC",
+            "goals": 3
+        },
+        "team_2": {
+            "name": "Bmx Bikey Bikey Bois",
+            "goals": 4
+        },
+        "winner": 2,
+        "date": "2022-12-04"
+    },
+    "match_6": {
+        "team_1": {
+            "name": "Beverton",
+            "goals": 0
+        },
+        "team_2": {
+            "name": "Soccer on Deez",
+            "goals": 6
+        },
+        "winner": 2,
+        "date": "2022-12-11"
+    },
+    "match_7": {
+        "team_1": {
+            "name": "Azkaban's Finest",
+            "goals": 4
+        },
+        "team_2": {
+            "name": "Soggy Sausages FC",
+            "goals": 1
+        },
+        "winner": 1,
+        "date": "2022-12-11"
+    },
+    "match_8": {
+        "team_1": {
+            "name": "Netflix and Chill",
+            "goals": 0
+        },
+        "team_2": {
+            "name": "Rush Hour",
+            "goals": 9
+        },
+        "winner": 2,
+        "date": "2022-12-11"
+    },
+    "match_9": {
+        "team_1": {
+            "name": "Binga's Blokes",
+            "goals": 1
+        },
+        "team_2": {
+            "name": "Sliding into CDMs",
+            "goals": 3
+        },
+        "winner": 2,
+        "date": "2022-12-11"
+    },
+    "match_10": {
+        "team_1": {
+            "name": "Bmx Bikey Bikey Bois",
+            "goals": 8
+        },
+        "team_2": {
+            "name": "Seks Bhagavaans",
+            "goals": 1
+        },
+        "winner": 1,
+        "date": "2022-12-11"
+    },
+    "match_11": {
+        "team_1": {
+            "name": "Sweet & Sour Pork",
+            "goals": 0
+        },
+        "team_2": {
+            "name": "Step Sissoko",
+            "goals": 7
+        },
+        "winner": 2,
+        "date": "2022-12-11"
+    }
+}

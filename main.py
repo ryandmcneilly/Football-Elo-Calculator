@@ -1,14 +1,23 @@
+# Imports
+import json
+
+
 # Constants
 # Goal difference edge cases
 GD_EDGE_CASES = {0: 1.0, 1: 1.0, 2: 1.5}
 # Starting elo of each team unless specified
-STARTING_ELO = 500
+STARTING_ELO = 1000
 # Title of competition
 TITLE = "SOCIAL 7-A-SIDE OUTDOOR SOCCER (Mens)"
 # Space filler when printing elos to screen
 FILLER = 4
 # Amount of spaces to the right of the teams when printing
 TEAM_RIGHT_SPACE = 2
+# The magnification factor of the elo gains/losses
+MAGNIFICATION = 100.0
+
+# The teams in the competition
+teams = []
 
 
 class Team(object):
@@ -43,7 +52,7 @@ def expected_result(elo_home: float, elo_away: float) -> float:
     return 1 / (pow(10, -abs(elo_home - elo_away) / 400) + 1)
 
 
-def goal_index(home_goals: int, away_goals: int) -> float:
+def goal_index(goal_difference: int) -> float:
     """ Returns the goal index which will help in getting the elo gains of the
     two teams.
 
@@ -54,9 +63,8 @@ def goal_index(home_goals: int, away_goals: int) -> float:
     Returns:
         float: The goal index of the match
     """
-    goal_difference = abs(home_goals - away_goals)
-
     # If less than two use edge case mapping as described in wiki
+    goal_difference = abs(goal_difference)
     if goal_difference <= 2:
         return GD_EDGE_CASES[goal_difference]
 
@@ -87,10 +95,45 @@ def print_elos() -> None:
         print(space_till_title // 3 * " " + str(team.get_elo()))
 
 
-# The teams in the competition
-teams = [Team("hello"), Team("asasasas")]
-# The weight index impacting how important a game is (relating to elo gains)
-weight_index = 1.0
+def update_points(name_home: str, name_away: str, gd: int) -> None:
+    if name_home not in [team.get_name() for team in teams]:
+        teams.append(Team(name_home))
+
+    if name_away not in [team.get_name() for team in teams]:
+        teams.append(Team(name_away))
+
+    # Calculate amount elo gained/lossed
+    for team in teams:
+        if team.get_name() == name_home:
+            team_home = team
+        elif team.get_name() == name_away:
+            team_away = team
+
+    # Result is 0.5 if draw, 1 if win 0 if lose
+    home_result = 0.5 if gd == 0 else int(gd > 0)
+    away_result = 0.5 if gd == 0 else int(gd < 0)
+
+    # Updates elos
+    team_home.update_elo(team_home.get_elo() + point_calculation(goal_index(gd),
+                         home_result, expected_result(team_home.get_elo(), team_away.get_elo())))
+    team_away.update_elo(team_away.get_elo() + point_calculation(goal_index(gd),
+                         away_result, 1 - expected_result(team_home.get_elo(), team_away.get_elo())))
+
+
+def point_calculation(goal_index: float, result: float, expected: float) -> None:
+    return MAGNIFICATION * goal_index * (result - expected)
+
+
+def read_data() -> None:
+    with open('game_data.json') as json_file:
+        data = json.load(json_file)
+
+    for match in data.values():
+        home_name, away_name = match["team_1"]["name"], match["team_2"]["name"]
+        gd = match["team_1"]["goals"] - match["team_2"]["goals"]
+        update_points(home_name, away_name, gd)
+
 
 if __name__ == "__main__":
+    read_data()
     print_elos()
