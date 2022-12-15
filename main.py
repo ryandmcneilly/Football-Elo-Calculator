@@ -76,6 +76,9 @@ def get_longest_name() -> str:
 
 
 def print_elos() -> None:
+    """ Prints the elos of the teams in the terminal. The elos printed are sorted
+    from largest elo to the smallest elo.
+    """
     # Prints title
     print(" " * FILLER + TITLE + " " * FILLER)
     print((len(TITLE) + 2 * FILLER) * "-")
@@ -96,6 +99,13 @@ def print_elos() -> None:
 
 
 def update_points(name_home: str, name_away: str, gd: int) -> None:
+    """ Updates the elo of the team based on goal difference
+
+    Args:
+        name_home (str): Name of the home team
+        name_away (str): Name of the away team
+        gd (int): The goal difference in perspective of the home team
+    """
     if name_home not in [team.get_name() for team in teams]:
         teams.append(Team(name_home))
 
@@ -121,10 +131,19 @@ def update_points(name_home: str, name_away: str, gd: int) -> None:
 
 
 def point_calculation(goal_index: float, result: float, expected: float) -> None:
+    """ Does the final calculation of how much each time should win or lose.
+
+    Args:
+        goal_index (float): The magnitute factor from the goal difference
+        result (float): 1 if home team, 0.5 if draw 0 if away team won
+        expected (float): based on elo who was meant to win
+    """
     return MAGNIFICATION * goal_index * (result - expected)
 
 
 def read_data() -> None:
+    """ Reads the data from json file provided by the scraper then updates the elo.
+    """
     with open('game_data.json') as json_file:
         data = json.load(json_file)
 
