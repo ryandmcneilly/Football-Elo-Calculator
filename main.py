@@ -1,7 +1,6 @@
 # Imports
 import json
 
-
 # Constants
 # Goal difference edge cases
 GD_EDGE_CASES = {0: 1.0, 1: 1.0, 2: 1.5}
@@ -16,9 +15,11 @@ TEAM_RIGHT_SPACE = 2
 # The magnification factor of the elo gains/losses
 MAGNIFICATION = 100.0
 
+# Quick fix to not print division 1 teams
+DIV1 = ["Sliding into CDMs", "Beverton", "Azkaban's Finest", "Bmx Bikey Bikey Bois", "Soccer on Deez", "Rush Hour"]
+
 # The teams in the competition
 teams = []
-
 
 class Team(object):
     """ Basic team object storing the name and the elo.
@@ -57,8 +58,7 @@ def goal_index(goal_difference: int) -> float:
     two teams.
 
     Args:
-        home_goals (int): Amount of goals the home team scored
-        away_goals (int): Amount of goals the away team scored
+        goal_difference (int): The goal difference between the two games
 
     Returns:
         float: The goal index of the match
@@ -68,6 +68,7 @@ def goal_index(goal_difference: int) -> float:
     if goal_difference <= 2:
         return GD_EDGE_CASES[goal_difference]
 
+    # Formula as stated in wikipedia
     return (11 + goal_difference) / 8.0
 
 
@@ -89,6 +90,8 @@ def print_elos() -> None:
     space_till_title = (len(TITLE) + 2 * FILLER) - length
 
     for counter, team in enumerate(teams):
+        if team.get_name() in DIV1:
+            continue
         # Prints Names of each team
         left_space = length - len(team.get_name())
         print(f"{counter + 1}. {team.get_name()}" +
@@ -131,7 +134,7 @@ def update_points(name_home: str, name_away: str, gd: int) -> None:
 
 
 def point_calculation(goal_index: float, result: float, expected: float) -> None:
-    """ Does the final calculation of how much each time should win or lose.
+    """ Computes the final calculation of how much each time should win or lose.
 
     Args:
         goal_index (float): The magnitute factor from the goal difference
@@ -153,7 +156,7 @@ def read_data() -> None:
         update_points(home_name, away_name, gd)
 
 
+# Prints the elos to the screen
 if __name__ == "__main__":
     read_data()
     print_elos()
-
